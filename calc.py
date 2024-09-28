@@ -1,7 +1,7 @@
 print("Please Select a Mathemat Operation")
 print("=======================")
 print("1 - Add number ")
-print("2 - Subtract numbers ")3
+print("2 - Subtract numbers ")
 print("3 - multipy numbers")
 print("4 - Divide numbers")
 print("5 - quit")
