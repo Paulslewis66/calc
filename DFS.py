@@ -7,9 +7,20 @@ G = {
     '3': ['6'],
 }
 
-def searchBFS(G, root):
-    checked = set()
-    input(root)
-    
+queue = deque()
+queue.append(G)
+checked = []
 
-searchBFS(G, '2')
+def algorithm(checked, queue, start):
+    checked.append(start)
+    # print(checked)
+    queue.append(start)
+    # print(queue)
+    while queue:
+        queue.popleft()
+        print(queue)
+
+        
+
+
+algorithm(checked, queue, '4')
