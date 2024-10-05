@@ -1,26 +1,9 @@
-from collections import deque
 
-G = {
-    '0': ['7', '5', '3'],
-    '7': ['2', '4'],
-    '5': ['1'],
-    '3': ['6'],
-}
+import networkx as nx
 
-queue = deque()
-queue.append(G)
-checked = []
+G = nx.Graph()
+#G.add_nodes_from([0, 1, 2, 3, 4, 5, 6, 7])
+G.add_edges_from([(0, 7), (0, 5), (0, 3), (7, 2), (7, 4), (0, 5), (5, 1), (0, 3), (3 , 6)])
 
-def algorithm(checked, queue, start):
-    checked.append(start)
-    # print(checked)
-    queue.append(start)
-    # print(queue)
-    while queue:
-        queue.popleft()
-        print(queue)
-
-        
-
-
-algorithm(checked, queue, '4')
+bfs = list(nx.bfs_tree(G, source=0))
+print(bfs)
