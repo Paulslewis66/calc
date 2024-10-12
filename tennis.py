@@ -1,7 +1,7 @@
 import pandas as pd
 
 df = pd.read_csv('tennis_data.txt',header=None)
-df.columns = ['ID','outlook', 'temp', 'humidity', 'wind','play']
+df.columns = ['ID','outlook', 'temp', 'humidity', 'wind', 'play']
 
 hot_no = len(df[(df['temp']=='Hot') & (df['play']=='No')]) / len(df[df['play']=='No'])
 mild_no = len(df[(df['temp']=='Mild') & (df['play']=='No')]) / len(df[df['play']=='No'])
@@ -10,7 +10,9 @@ hot_yes = len(df[(df['temp']=='Hot') & (df['play']=='Yes')]) / len(df[df['play']
 mild_yes = len(df[(df['temp']=='Mild') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 cool_yes = len(df[(df['temp']=='Cool') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 
-print(hot_no, hot_yes, mild_no, mild_yes, cool_no, cool_yes)
+print("Prob Temp Hot, Prior No - ", hot_no, "\nProb Temp Hot, Prior Yes - ", round(hot_yes,1), "\nProb Temp Mild, Prior No - ", 
+mild_no, "\nProb Temp Mild, Prior Yes - ", round(mild_yes,1), "\nProb Temp Cool, Prior No - ", cool_no, "\nProb Temp Cool, Prior Yes - ", 
+round(cool_yes,1))
 
 sunny_no = len(df[(df['outlook']=='Sunny') & (df['play']=='No')]) / len(df[df['play']=='No'])
 overcast_no = len(df[(df['outlook']=='Overcast') & (df['play']=='No')]) / len(df[df['play']=='No'])
@@ -19,18 +21,25 @@ sunny_yes = len(df[(df['outlook']=='Sunny') & (df['play']=='Yes')]) / len(df[df[
 overcast_yes = len(df[(df['outlook']=='Overcast') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 rain_yes = len(df[(df['outlook']=='Rain') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 
-print(sunny_no, overcast_no, rain_no, sunny_yes, overcast_yes, rain_yes)
+####print(sunny_no, overcast_no, rain_no, sunny_yes, overcast_yes, rain_yes)
 
 strong_no = len(df[(df['wind']=='Strong') & (df['play']=='No')]) / len(df[df['play']=='No'])
 weak_no = len(df[(df['wind']=='Weak') & (df['play']=='No')]) / len(df[df['play']=='No'])
 strong_yes = len(df[(df['wind']=='Strong') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 weak_yes = len(df[(df['wind']=='Weak') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 
-print(strong_no, weak_no, strong_yes, strong_no)
+##print(strong_no, weak_no, strong_yes, strong_no)
 
 high_no = len(df[(df['humidity']=='High') & (df['play']=='No')]) / len(df[df['play']=='No'])
 normal_no = len(df[(df['humidity']=='Normal') & (df['play']=='No')]) / len(df[df['play']=='No'])
 high_yes = len(df[(df['humidity']=='High') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 normal_yes = len(df[(df['humidity']=='Normal') & (df['play']=='Yes')]) / len(df[df['play']=='Yes'])
 
-print(high_no, high_yes, normal_no, normal_yes)
+#print(high_no, high_yes, normal_no, normal_yes)
+
+result = rain_yes * len(df[df['play']=='Yes']) / len(df[df['play']=='No'])
+print(" If it rains will i play Tennis? =", result)
+result = sunny_yes * len(df[df['play']=='Yes']) / len(df[df['play']=='No'])
+print(" If it sunny will i play Tennis? =", result)
+result = weak_yes * len(df[df['play']=='Yes']) / len(df[df['play']=='No'])
+print(" If it strong wind will i play Tennis? =", result)
