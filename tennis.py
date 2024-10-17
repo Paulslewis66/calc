@@ -1,6 +1,8 @@
 import pandas as pd
-from pgmpy.models import BayesianModel
+
+from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
+
 
 df = pd.read_csv('tennis_data.txt',header=None) # Read in Tennis.CSV with observations
 df.columns = ['ID','outlook', 'temp', 'humidity', 'wind', 'play'] # Add Column Names
@@ -35,38 +37,11 @@ normal_yes = len(df[(df['humidity']=='Normal') & (df['play']=='Yes')]) / len(df[
 #print("Prob Temp Hot, Prior No - ", hot_no, "\nProb Temp Hot, Prior Yes - ", round(hot_yes,1), "\nProb Temp Mild, Prior No - ", 
 #mild_no, "\nProb Temp Mild, Prior Yes - ", round(mild_yes,1), "\nProb Temp Cool, Prior No - ", cool_no, "\nProb Temp Cool, Prior Yes - ", 
 #round(cool_yes,1))
-'''
-print("Play Tennis?")
-print("Nope", len(df[df['play']=='No'])/14)
-print("Yes", len(df[df['play']=='Yes'])/14)
-print("Temp......")
-print("Hot No", round(hot_no,1))
-print("Mild No", round(mild_no,1))
-print("Cool No", round(cool_no,1))
-print("Hot yes", round(hot_yes,1))
-print("Mild yes", round(mild_yes,1))
-print("Cool yes", round(cool_yes,1))
-print("Outlook..........")
-print("Sun yes", round(sunny_yes,1))
-print("Overcast yes", round(overcast_yes,1))
-print("Rain yes", round(rain_yes,1))
-print("Sun no", round(sunny_no,1))
-print("Overcast no", round(overcast_no,1))
-print("Rain no", round(rain_no,1))
-print("Wind..........")
-print("Strong yes", round(strong_yes,1))
-print("Weak yes", round(weak_yes,1))
-print("Strong no", round(strong_no,1))
-print("weak no", round(weak_no,1))
-print("Humidiy......")
-print("High yes", round(high_yes,1))
-print("Normal yes", round(normal_yes,1))
-print("High no", round(high_no,1))
-print("Normal no", round(normal_no,1))
-'''
 
-answer_yes = sunny_yes * cool_yes * high_yes * strong_yes * play_yes
-answer_no = sunny_no * cool_no * high_no * strong_no * play_no
 
-print(answer_yes)
-print(answer_no)
+# Defining the model structure. We can define the network by just passing a list of edges.
+model = BayesianNetwork([('Temp', 'Outlook'), ('Humidity', 'Outlook'), ('Outlook', 'Play'), ('Wind', 'Play')])
+
+# Defining individual CPDs.
+cpd_Temp = TabularCPD(variable='Temp', variable_card=2, values=(high_no, high_yes))
+cpd_Hum = TabularCPD(variable='Humidity', variable_card=2, values=[[0.7], [0.3]])
