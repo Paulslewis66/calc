@@ -1,4 +1,6 @@
 import pandas as pd
+from pgmpy.models import BayesianModel
+from pgmpy.factors.discrete import TabularCPD
 
 df = pd.read_csv('tennis_data.txt',header=None) # Read in Tennis.CSV with observations
 df.columns = ['ID','outlook', 'temp', 'humidity', 'wind', 'play'] # Add Column Names
@@ -33,7 +35,7 @@ normal_yes = len(df[(df['humidity']=='Normal') & (df['play']=='Yes')]) / len(df[
 #print("Prob Temp Hot, Prior No - ", hot_no, "\nProb Temp Hot, Prior Yes - ", round(hot_yes,1), "\nProb Temp Mild, Prior No - ", 
 #mild_no, "\nProb Temp Mild, Prior Yes - ", round(mild_yes,1), "\nProb Temp Cool, Prior No - ", cool_no, "\nProb Temp Cool, Prior Yes - ", 
 #round(cool_yes,1))
-
+'''
 print("Play Tennis?")
 print("Nope", len(df[df['play']=='No'])/14)
 print("Yes", len(df[df['play']=='Yes'])/14)
@@ -61,6 +63,7 @@ print("High yes", round(high_yes,1))
 print("Normal yes", round(normal_yes,1))
 print("High no", round(high_no,1))
 print("Normal no", round(normal_no,1))
+'''
 
 answer_yes = sunny_yes * cool_yes * high_yes * strong_yes * play_yes
 answer_no = sunny_no * cool_no * high_no * strong_no * play_no
